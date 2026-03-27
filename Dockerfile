@@ -42,8 +42,10 @@ COPY --chown=cursor:nodejs public ./public
 # 创建日志目录并授权
 RUN mkdir -p /app/logs && chown cursor:nodejs /app/logs
 
-# 注意：config.yaml 不打包进镜像，通过 docker-compose volumes 挂载
+# 注意：config.yaml 默认不打包进镜像，通过 docker-compose volumes 挂载
 # 如果未挂载，服务会使用内置默认值 + 环境变量
+# 如需要将config.yaml打包进入，则自行添加config文件后，解开当前注释
+# COPY --chown=cursor:nodejs config.yaml ./config.yaml
 
 # 切换到非 root 用户
 USER cursor
